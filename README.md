@@ -1,4 +1,3 @@
-```markdown
 # John 1.0 - JCL Interpreter
 
 **John 1.0** to system operacyjny dla mikrokontrolerów Arduino, wyposażony w prosty interpreter poleceń o nazwie **JCL (John's Command Language)**. Umożliwia on interakcję z urządzeniem za pomocą klawiatury PS/2 i wyświetlacza LCD, oferując zestaw wbudowanych funkcji.
