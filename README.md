@@ -1,98 +1,133 @@
-# John 1.0 - JCL Interpreter
+# John 1.0 JCL Interpreter - Przewodnik Użytkownika
 
-**John 1.0** to system operacyjny dla mikrokontrolerów Arduino, wyposażony w prosty interpreter poleceń o nazwie **JCL (John's Command Language)**. Umożliwia on interakcję z urządzeniem za pomocą klawiatury PS/2 i wyświetlacza LCD, oferując zestaw wbudowanych funkcji.
+Ten przewodnik jest przeznaczony dla użytkowników, którzy posiadają tylko skompilowaną wersję interpretera John 1.0 i nie mają dostępu do kodu źródłowego.
 
-## Cechy systemu:
+## Wprowadzenie
 
-*   **Interpreter JCL:** Umożliwia wykonywanie poleceń wprowadzanych za pomocą klawiatury PS/2.
-*   **Obsługa klawiatury PS/2:** Pełna obsługa standardowej klawiatury PS/2.
-*   **Wyświetlacz LCD:** Wyświetlanie komend, wyników i komunikatów na ekranie LCD 16x4.
-*   **Wbudowane funkcje:**  System zawiera zestaw podstawowych funkcji, w tym:
-    *   `add <liczba1> <liczba2>`: Dodaje dwie liczby zmiennoprzecinkowe.
-    *   `subtract <liczba1> <liczba2>`: Odejmuje dwie liczby zmiennoprzecinkowe.
-    *   `clearScreen`: Czyści ekran LCD.
-    *   `floatToInt <liczba>`: Konwertuje liczbę zmiennoprzecinkową na całkowitą.
-*   **Możliwość rozszerzenia:** System został zaprojektowany z myślą o łatwym dodawaniu nowych funkcji. (Informacja dla ciebie jako developera, użytkownik nie musi tego wiedzieć)
+John 1.0 to interpreter poleceń (JCL) dla platformy Arduino, umożliwiający interaktywne wykonywanie funkcji matematycznych i sterowanie podstawowymi operacjami. System komunikuje się z użytkownikiem poprzez wyświetlacz LCD 20x4 oraz klawiaturę PS/2.
 
-## Wymagania sprzętowe:
+## Podstawowe Funkcje
 
-*   Płytka Arduino Uno (lub kompatybilna, np. Nano, Mega z mikrokontrolerem Atmega328p).
-*   Klawiatura PS/2.
-*   Wyświetlacz LCD 16x4 ze sterownikiem HD44780.
-*   Przewody połączeniowe.
-*   Rezystory podciągające (pull-up) dla klawiatury PS/2 (opcjonalnie, w zależności od modelu klawiatury - sprawdź dokumentację).
-*   Potencjometr do regulacji kontrastu LCD (opcjonalnie, w zależności od modelu LCD).
+System oferuje następujące funkcje:
 
-## Instalacja:
+### Funkcje Matematyczne
 
-1. **Skompiluj kod źródłowy:** Użyj Arduino IDE, aby skompilować dostarczony kod.
-2. **Wgraj program na Arduino:** Podłącz Arduino do komputera i wgraj skompilowany program (plik `.hex`) na płytkę za pomocą Arduino IDE lub innego programatora (np. `avrdude`).
+System obsługuje podstawowe operacje matematyczne, które można wywoływać za pomocą odpowiednich poleceń. Poniżej znajduje się lista dostępnych funkcji wraz z opisem argumentów i działania:
 
-## Uruchomienie:
+*   **`add <liczba1> <liczba2>`** - Dodaje dwie liczby.
+    *   Argumenty:
+        *   `<liczba1>` - Pierwsza liczba (zmiennoprzecinkowa).
+        *   `<liczba2>` - Druga liczba (zmiennoprzecinkowa).
+    *   Działanie: Wyświetla sumę dwóch podanych liczb na wyświetlaczu LCD.
+*   **`subtract <liczba1> <liczba2>`** - Ode Jmuje dwie liczby.
+    *   Argumenty:
+        *   `<liczba1>` - Pierwsza liczba (zmiennoprzecinkowa).
+        *   `<liczba2>` - Druga liczba (zmiennoprzecinkowa).
+    *   Działanie: Wyświetla różnicę dwóch podanych liczb na wyświetlaczu LCD.
+*   **`multiply <liczba1> <liczba2>`** - Mnoży dwie liczby.
+    *   Argumenty:
+        *   `<liczba1>` - Pierwsza liczba (zmiennoprzecinkowa).
+        *   `<liczba2>` - Druga liczba (zmiennoprzecinkowa).
+    *   Działanie: Wyświetla iloczyn dwóch podanych liczb na wyświetlaczu LCD.
+*   **`divide <liczba1> <liczba2>`** - Dzieli dwie liczby.
+    *   Argumenty:
+        *   `<liczba1>` - Pierwsza liczba (zmiennoprzecinkowa).
+        *   `<liczba2>` - Druga liczba (zmiennoprzecinkowa).
+    *   Działanie: Wyświetla wynik dzielenia dwóch podanych liczb na wyświetlaczu LCD. W przypadku próby dzielenia przez zero, na wyświetlaczu pojawi się komunikat o błędzie.
+*   **`power <liczba1> <liczba2>`** - Podnosi liczbę do potęgi.
+    *   Argumenty:
+        *   `<liczba1>` - Podstawa potęgi (zmiennoprzecinkowa).
+        *   `<liczba2>` - Wykładnik potęgi (zmiennoprzecinkowa).
+    *   Działanie: Wyświetla wynik podnoszenia liczby `<liczba1>` do potęgi `<liczba2>` na wyświetlaczu LCD.
+*   **`squareRoot <liczba>`** - Oblicza pierwiastek kwadratowy z liczby.
+    *   Argumenty:
+        *   `<liczba>` - Liczba, z której ma być obliczony pierwiastek (zmiennoprzecinkowa).
+    *   Działanie: Wyświetla pierwiastek kwadratowy z podanej liczby na wyświetlaczu LCD. W przypadku podania liczby ujemnej, na wyświetlaczu pojawi się komunikat o błędzie.
+*   **`sine <kąt>`** - Oblicza sinus kąta.
+    *   Argumenty:
+        *   `<kąt>` - Kąt w radianach (zmiennoprzecinkowa).
+    *   Działanie: Wyświetla sinus podanego kąta na wyświetlaczu LCD.
+*   **`cosine <kąt>`** - Oblicza cosinus kąta.
+    *   Argumenty:
+        *   `<kąt>` - Kąt w radianach (zmiennoprzecinkowa).
+    *   Działanie: Wyświetla cosinus podanego kąta na wyświetlaczu LCD.
+*   **`tangent <kąt>`** - Oblicza tangens kąta.
+    *   Argumenty:
+        *   `<kąt>` - Kąt w radianach (zmiennoprzecinkowa).
+    *   Działanie: Wyświetla tangens podanego kąta na wyświetlaczu LCD.
+*   **`naturalLog <liczba>`** - Oblicza logarytm naturalny z liczby.
+    *   Argumenty:
+        *   `<liczba>` - Liczba, z której ma być obliczony logarytm naturalny (zmiennoprzecinkowa).
+    *   Działanie: Wyświetla logarytm naturalny z podanej liczby na wyświetlaczu LCD. W przypadku podania liczby mniejszej lub równej zero, na wyświetlaczu pojawi się komunikat o błędzie.
+*   **`base10Log <liczba>`** - Oblicza logarytm dziesiętny z liczby.
+    *   Argumenty:
+        *   `<liczba>` - Liczba, z której ma być obliczony logarytm dziesiętny (zmiennoprzecinkowa).
+    *   Działanie: Wyświetla logarytm dziesiętny z podanej liczby na wyświetlaczu LCD. W przypadku podania liczby mniejszej lub równej zero, na wyświetlaczu pojawi się komunikat o błędzie.
+*   **`absoluteValue <liczba>`** - Oblicza wartość bezwzględną z liczby.
+    *   Argumenty:
+        *   `<liczba>` - Liczba, z której ma być obliczona wartość bezwzględna (zmiennoprzecinkowa).
+    *   Działanie: Wyświetla wartość bezwzględną z podanej liczby na wyświetlaczu LCD.
+*   **`ceilValue <liczba>`** - Zaokrągla liczbę w górę.
+    *   Argumenty:
+        *   `<liczba>` - Liczba, która ma być zaokrąglona (zmiennoprzecinkowa).
+    *   Działanie: Wyświetla liczbę zaokrągloną w górę na wyświetlaczu LCD.
+*   **`floorValue <liczba>`** - Zaokrągla liczbę w dół.
+    *   Argumenty:
+        *   `<liczba>` - Liczba, która ma być zaokrąglona (zmiennoprzecinkowa).
+    *   Działanie: Wyświetla liczbę zaokrągloną w dół na wyświetlaczu LCD.
+*   **`modulo <liczba1> <liczba2>`** - Oblicza resztę z dzielenia (modulo).
+    *   Argumenty:
+        *   `<liczba1>` - Liczba, która ma być dzielona (całkowita).
+        *   `<liczba2>` - Dzielnik (całkowita).
+    *   Działanie: Wyświetla resztę z dzielenia liczby `<liczba1>` przez `<liczba2>` na wyświetlaczu LCD. W przypadku próby dzielenia przez zero, na wyświetlaczu pojawi się komunikat o błędzie.
 
-1. **Podłącz klawiaturę PS/2** do pinów cyfrowych 2 (Data) i 3 (IRQ) w Arduino oraz do zasilania (5V i GND).
-2. **Podłącz wyświetlacz LCD** do Arduino zgodnie ze schematem:
-    *   LCD RS -> Pin 8
-    *   LCD Enable -> Pin 9
-    *   LCD D4 -> Pin 4
-    *   LCD D5 -> Pin 5
-    *   LCD D6 -> Pin 6
-    *   LCD D7 -> Pin 7
-    *   LCD VSS -> GND
-    *   LCD VDD -> 5V
-    *   LCD V0 -> Potencjometr (środkowy pin)
-    *   Potencjometr (skrajne piny) -> 5V i GND
-    *   LCD R/W -> GND
-    *   LCD A -> 5V (przez rezystor ~220 Ohm, jeśli podświetlenie jest zbyt jasne)
-    *   LCD K -> GND
-3. **Podłącz zasilanie do Arduino.**
-4. **Uruchom system.** Na ekranie LCD powinien pojawić się tekst powitalny:
+### Interakcja z Systemem
 
-```
-John 1.0
-JCL Interpreter
->
-```
+#### Wprowadzanie Poleceń
 
-## Używanie JCL:
+Użytkownik wprowadza polecenia za pomocą klawiatury PS/2. Wprowadzony tekst pojawia się w drugiej linii wyświetlacza LCD. Po zakończeniu wprowadzania polecenia, należy wcisnąć klawisz Enter.
 
-*   Wprowadź polecenia za pomocą klawiatury PS/2.
-*   Zatwierdź polecenie klawiszem **Enter**.
-*   Obserwuj wyniki na ekranie LCD.
-*   Możesz wprowadzać kilka poleceń w jednym wierszu, oddzielając je średnikami (`;`).
+#### Wyświetlanie Wyników
 
-**Dostępne polecenia:**
+Wyniki obliczeń oraz komunikaty systemowe są wyświetlane w trzeciej linii wyświetlacza LCD.
 
-*   `add <liczba1> <liczba2>`: Dodaje dwie liczby. Przykład: `add 5.5 2.7`
-*   `subtract <liczba1> <liczba2>`: Odejmuje dwie liczby. Przykład: `subtract 10 3`
-*   `clearScreen`: Czyści ekran LCD. Przykład: `clearScreen`
-*   `floatToInt <liczba>`: Konwertuje liczbę zmiennoprzecinkową na całkowitą. Przykład: `floatToInt 7.8`
+#### Usuwanie Znaków
 
-**Przykład użycia:**
+Do usuwania wprowadzonych znaków służy klawisz Backspace.
 
-```
->clearScreen;add 5 3;subtract 10 2;floatToInt 25.6
-```
+## Konfiguracja Sprzętowa
 
-**Uwagi:**
+Aby system działał poprawnie, należy odpowiednio skonfigurować połączenia sprzętowe:
 
-*   Interpreter JCL jest prosty i nie obsługuje zaawansowanych funkcji, takich jak zmienne, pętle czy instrukcje warunkowe.
-*   Błędy (np. nieznane polecenie, nieprawidłowa liczba argumentów) są sygnalizowane na LCD.
+*   **Wyświetlacz LCD**: Podłącz wyświetlacz LCD 20x4 zgodnie z poniższymi pinami:
+    *   RS: Pin 8 Arduino
+    *   Enable: Pin 9 Arduino
+    *   D4: Pin 4 Arduino
+    *   D5: Pin 5 Arduino
+    *   D6: Pin 6 Arduino
+    *   D7: Pin 7 Arduino
+*   **Klawiatura PS/2**: Podłącz klawiaturę PS/2 zgodnie z poniższymi pinami:
+    *   Data: Pin 2 Arduino
+    *   IRQ: Pin 3 Arduino
 
-## Rozwiązywanie problemów:
+## Znane Ograniczenia
 
-*   **Brak tekstu na LCD:** Sprawdź połączenia LCD i regulację kontrastu (potencjometr).
-*   **Brak reakcji na klawiaturę:** Sprawdź połączenia klawiatury, upewnij się, że używasz klawiatury PS/2, a nie USB, oraz sprawdź, czy potrzebne są rezystory podciągające.
-*   **Nieoczekiwane wyniki:** Upewnij się, że wprowadzasz poprawne polecenia i argumenty.
+*   System obsługuje tylko podstawowe operacje matematyczne.
+*   System nie obsługuje zmiennych.
+*   System nie obsługuje złożonych wyrażeń matematycznych.
+*   System nie obsługuje plików zewnętrznych.
+*   System nie obsługuje polskich znaków.
+*   System ma ograniczoną ilość pamięci RAM, co może ograniczać długość wprowadzanych poleceń i złożoność wykonywanych operacji.
+*   Wyświetlacz LCD 20x4 ma ograniczoną ilość miejsca, co może powodować obcinanie długich wyników.
 
-## Przyszłe Rozszerzenia:
+## Rozwiązywanie Problemów
 
-*   Wsparcie dla większej liczby funkcji.
-*   Możliwość definiowania własnych funkcji (zmienne lokalne, parametry).
-*   Dodanie instrukcji warunkowych i pętli.
+*   **Brak wyświetlania**: Sprawdź, czy wyświetlacz LCD jest poprawnie podłączony i zasilany. Sprawdź kontrast wyświetlacza LCD.
+*   **Brak reakcji na klawiaturę**: Sprawdź, czy klawiatura PS/2 jest poprawnie podłączona. Sprawdź, czy klawiatura jest sprawna.
+*   **Nieprawidłowe wyniki**: Sprawdź, czy wprowadzone polecenia są poprawne i czy argumenty są poprawnego typu.
+
+## Podsumowanie
+
+John 1.0 to prosty, ale funkcjonalny interpreter poleceń dla platformy Arduino. Mimo pewnych ograniczeń, system może być użyteczny do wykonywania podstawowych operacji matematycznych i eksperymentowania z programowaniem.
 
 ---
-
-**Zastrzeżenie:**
-
-John 1.0 i JCL są prostym systemem stworzonym w celach edukacyjnych i demonstracyjnych. Nie jest on przeznaczony do zastosowań krytycznych ani profesjonalnych. Twórca nie ponosi odpowiedzialności za ewentualne szkody wynikłe z użytkowania systemu.
